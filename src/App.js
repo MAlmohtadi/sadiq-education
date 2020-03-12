@@ -1,26 +1,44 @@
-import React from 'react';
-import logo from './logo.svg';
+import React  from 'react';
 import './App.css';
+import { Container } from '@material-ui/core';
+import Navbar from './layout/Navbar';
+import { createBrowserHistory } from "history";
+import { Router, Route, Switch } from 'react-router-dom';
+import Home from './pages/Home';
+import Course from './pages/Course';
+
+import useMediaQuery from '@material-ui/core/useMediaQuery';
+import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
+
+const history = createBrowserHistory();
+
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+  const prefersDarkMode = useMediaQuery('(prefers-color-scheme: dark)');
+
+  const theme = React.useMemo(
+    () =>
+      createMuiTheme({
+        palette: {
+          type: prefersDarkMode ? 'dark' : 'light',
+        },
+      }),
+    [prefersDarkMode],
   );
+  
+  return (
+    <ThemeProvider theme={theme}>
+      <Navbar />
+      <Container maxWidth="xl" style={{ marginTop: '80px' }}>
+        <Router history={history}>
+          <Switch >
+            <Route exact path='/' component={Home} />
+            <Route exact path='/course' component={Course} />
+          </Switch>
+        </Router>
+      </Container>
+    </ThemeProvider>
+  )
 }
 
 export default App;
