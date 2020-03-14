@@ -1,13 +1,14 @@
 import {
   GET_VIDEOS,
   GET_VIDEOS_ERROR,
-  SET_CURRENT_VIDEO
-
+  SET_CURRENT_VIDEO,
+  LOAD_MORE_VIDEOS
 } from '../actions/types';
 
 const initialState = {
   videos: [],
-  pageInfo: null,
+  pageInfo: { totalResults: 0 },
+  currentVideo: { snippet: { resourceId: {} } },
   filtered: null,
   error: null,
   loading: true
@@ -22,6 +23,18 @@ export default (state = initialState, action) => {
         videos: action.payload.items,
         currentVideo: action.payload.items[0],
         pageInfo: action.payload.pageInfo,
+        nextPageToken: action.payload.nextPageToken,
+        loading: false
+      };
+    case LOAD_MORE_VIDEOS:
+      let keys = {};
+      state.videos.map(item => keys[item.id] = item.id)
+      const filterMoreVideo = action.payload.items.filter(item => keys[item.id] === undefined)
+      return {
+        ...state,
+        videos: [...state.videos, ...filterMoreVideo],
+        pageInfo: action.payload.pageInfo,
+        nextPageToken: action.payload.nextPageToken,
         loading: false
       };
     case GET_VIDEOS_ERROR:

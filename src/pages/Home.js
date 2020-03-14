@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import CourseCard from '../components/CoursesCard';
+import CourseCard from '../components/CourseCard';
 import { Grid } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import { getPlaylists } from '../actions/playlistsActions'

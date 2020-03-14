@@ -7,6 +7,7 @@ import {
 const initialState = {
   playlists: [],
   pageInfo: null,
+  nextPageToken: undefined,
   filtered: null,
   error: null,
   loading: true
@@ -20,6 +21,7 @@ export default (state = initialState, action) => {
         ...state,
         playlists: action.payload.items,
         pageInfo: action.payload.pageInfo,
+        nextPageToken: action.payload.nextPageToken,
         loading: false
       };
     case GET_PLAYlITS_ERROR:

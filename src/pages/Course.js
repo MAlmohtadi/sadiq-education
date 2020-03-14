@@ -1,12 +1,13 @@
 import React, { useEffect } from 'react';
 import {
-    Grid, Paper, CircularProgress, GridList,
-    GridListTile, GridListTileBar, Typography
+    Grid, Paper, CircularProgress,
+    Typography
 } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
-import { getVideos, setCurrentVideo } from '../actions/courseActions';
+import { getVideos, loadMoreVideos } from '../actions/courseActions';
+import Lectures from '../components/Lectures';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -16,20 +17,7 @@ const useStyles = makeStyles(theme => ({
         textAlign: 'center',
         color: theme.palette.text.secondary,
         height: '100%',
-    },
-    videoListContainer: {
-        padding: theme.spacing(2),
-        display: 'flex',
-        flexWrap: 'wrap',
-        overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
-    },
-    gridList: {
-        borderTop: '2px solid red',
-        paddingTop: 10,
-        marginTop: 20,
-        height: 550,
-    },
+    }
 }));
 
 const Container = props => <Grid container {...props} justify='center' spacing={2} />;
@@ -43,17 +31,21 @@ const Course = (props) => {
                 state: { playlistId, title }
             }
         },
-        course: { videos, currentVideo, loading },
-        getVideos, setCurrentVideo } = props;
+        course: { currentVideo, loading, nextPageToken },
+        getVideos, loadMoreVideos } = props;
 
     useEffect(() => {
         getVideos({ playlistId });
     }, [])
 
-    const handleClickOnVideo = (position) => {
-        setCurrentVideo(position);
-    }
 
+    const loadMore = () => {
+        console.log('scroll')
+        if (nextPageToken) {
+            loadMoreVideos({ playlistId, nextPageToken });
+        }
+
+    }
     return (
         <div className={classes.root}>
             <Container>
@@ -62,7 +54,7 @@ const Course = (props) => {
                         {title}
                     </Typography>
                 </Item>
-                <Item xs={12} sm={12} md={9} style={{ minHeight: '550px', maxHeight: '900px' }}>
+                <Item xs={12} sm={12} md={9} style={{ minHeight: '450px', maxHeight: '900px' }}>
                     <Paper className={classes.paper} elevation={5} >
                         {loading ?
                             <CircularProgress className={classes.loading} /> :
@@ -72,26 +64,7 @@ const Course = (props) => {
                     </Paper>
                 </Item>
                 <Item xs={12} sm={12} md={3}>
-                    <Paper className={classes.videoListContainer}>
-                        <Typography variant="h6" component="h6" style={{ marginBottom: '20px' }}>
-                            Lectures
-                        </Typography>
-                        <GridList cellHeight={150} cols={1} className={classes.gridList}>
-                            {videos.map(item => {
-                                const { snippet: { position, thumbnails, title } } = item;
-                                return <GridListTile key={position}
-                                    onClick={() => handleClickOnVideo(position)}
-                                    style={position === currentVideo.snippet.position
-                                        ? { border: '2px solid red' } : {}} >
-                                    <img src={(thumbnails.standard && thumbnails.standard.url) || thumbnails.default.url} alt={title} />
-                                    <GridListTileBar
-                                        title={title}
-                                    />
-                                </GridListTile>
-                            })}
-                        </GridList>
-                    </Paper>
-
+                    <Lectures loadMore={loadMore} />
                 </Item>
             </Container>
         </div>)
@@ -100,4 +73,4 @@ const Course = (props) => {
 const mapStateToProps = state => ({
     course: state.courseReducer
 })
-export default connect(mapStateToProps, { getVideos, setCurrentVideo })(Course);
+export default connect(mapStateToProps, { getVideos, loadMoreVideos })(Course);

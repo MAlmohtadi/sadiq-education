@@ -2,15 +2,18 @@ import axios from 'axios';
 import {
   GET_VIDEOS,
   GET_VIDEOS_ERROR,
-  SET_CURRENT_VIDEO
+  SET_CURRENT_VIDEO,
+  LOAD_MORE_VIDEOS,
+  LOAD_MORE_VIDEOS_ERROR
 } from './types';
 import config from '../config/youtubeConfig';
-
+const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems`;
+const { api_key } = config;
 // Get Playlist Videos
-export const getVideos = ({ maxResults = 50, playlistId }) => async dispatch => {
-  const { api_key } = config;
+export const getVideos = ({ maxResults = 50, playlistId, nextPageToken }) => async dispatch => {
 
-  const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems`;
+
+
 
   try {
     const res = await axios.get(apiUrl, {
@@ -18,6 +21,7 @@ export const getVideos = ({ maxResults = 50, playlistId }) => async dispatch => 
         part: 'snippet',
         playlistId,
         maxResults,
+        pageToken: nextPageToken,
         key: api_key
       }
     });
@@ -33,7 +37,30 @@ export const getVideos = ({ maxResults = 50, playlistId }) => async dispatch => 
     });
   }
 };
+export const loadMoreVideos =  ({ maxResults = 50, playlistId, nextPageToken }) => async dispatch =>  {
 
+  try {
+    const res = await axios.get(apiUrl, {
+      params: {
+        part: 'snippet',
+        playlistId,
+        maxResults,
+        pageToken: nextPageToken,
+        key: api_key
+      }
+    });
+
+    dispatch({
+      type: LOAD_MORE_VIDEOS,
+      payload: res.data
+    });
+  } catch (err) {
+    dispatch({
+      type: LOAD_MORE_VIDEOS_ERROR,
+      payload: err
+    });
+  }
+}
 export const setCurrentVideo = (position) => async dispatch => {
   dispatch({
     type: SET_CURRENT_VIDEO,
