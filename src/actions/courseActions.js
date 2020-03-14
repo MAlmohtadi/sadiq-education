@@ -6,12 +6,19 @@ import {
   LOAD_MORE_VIDEOS,
   LOAD_MORE_VIDEOS_ERROR
 } from './types';
-import config from '../config/youtubeConfig';
+
+// import config from '../config/youtubeConfig';
 const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems`;
-const api_key = process.env.API_KEY || config.api_key;
+let apiKey;
+if (process.env.NODE_ENV !== 'production') {
+  apiKey = process.env.REACT_APP_API_YOUTUBE_KEY;
+} else {
+  apiKey = process.env.API_YOUTUBE_KEY;
+}
+
 // Get Playlist Videos
 export const getVideos = ({ maxResults = 50, playlistId, nextPageToken }) => async dispatch => {
-
+  console.log('API_YOUTUBE_KEY', apiKey)
   try {
     const res = await axios.get(apiUrl, {
       params: {
@@ -19,7 +26,7 @@ export const getVideos = ({ maxResults = 50, playlistId, nextPageToken }) => asy
         playlistId,
         maxResults,
         pageToken: nextPageToken,
-        key: api_key
+        key: apiKey
       }
     });
 
@@ -43,7 +50,7 @@ export const loadMoreVideos = ({ maxResults = 50, playlistId, nextPageToken }) =
         playlistId,
         maxResults,
         pageToken: nextPageToken,
-        key: api_key
+        key: apiKey
       }
     });
 

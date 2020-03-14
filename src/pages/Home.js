@@ -1,5 +1,4 @@
-import React, { useEffect } from 'react';
-import CourseCard from '../components/CourseCard';
+import React from 'react';
 import { Grid, Card, CardActionArea, CardMedia, CardContent, Typography, CardActions, Button } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 import { getPlaylists } from '../actions/playlistsActions'
@@ -14,11 +13,6 @@ const useStyles = makeStyles({
 const Home = (props) => {
     let history = useHistory();
     const classes = useStyles();
-
-    const { getPlaylists, playlistsReducer: { playlists, loading } } = props;
-    useEffect(() => {
-        loading && getPlaylists();
-    }, [])
 
     const handleClickOnCard = () => {
         history.push({ pathname: '/courses' })
