@@ -14,7 +14,7 @@ const useStyles = makeStyles(theme => ({
     media: {
         height: 190,
     },
-    text:{
+    text: {
         color: theme.palette.primary.contrastText,
     }
 }));
@@ -22,8 +22,7 @@ const useStyles = makeStyles(theme => ({
 const CourseCard = ({ item, onClick }) => {
     const classes = useStyles();
     return (
-
-        <Card className={classes.card} onClick={() => onClick(item.id)}>
+        <Card className={classes.card} onClick={() => onClick(item)}>
             <CardActionArea >
                 {!item ? (
                     <Skeleton animation="wave" variant="rect" className={classes.media} />

@@ -3,6 +3,7 @@ import config from '../config/youtubeConfig';
 import CourseCard from '../components/CoursesCard';
 import { Grid } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
+import moment from 'moment';
 
 const Home = (props) => {
     let history = useHistory();
@@ -17,7 +18,7 @@ const Home = (props) => {
         fetch(apiUrl)
             .then(result => result.json())
             .then(data => {
-                setPlaylists(data.items)
+                setPlaylists(data.items.sort((a, b) => moment(b.snippet.publishedAt).isAfter(a.snippet.publishedAt) ? 1 : -1))
                 setLoading(false)
             }).catch(err => {
                 setLoading(false)
@@ -26,17 +27,16 @@ const Home = (props) => {
 
     }, [])
 
-    const handleClickOnCard = (playlistId) => {
-        history.push({ pathname: '/course', state: { playlistId } })
+    const handleClickOnCard = ({ id, snippet: { title } }) => {
+        history.push({ pathname: '/course', state: { playlistId: id, title } })
     }
 
     return <Grid container direction="row"
         justify="space-evenly"
         alignItems="center">
-        {(loading ? Array.from(new Array(3)) : playlists).map((item, index) => {
-
-            return <CourseCard item={item} key={index} onClick={handleClickOnCard} />
-        })}
+        {(loading ? Array.from(new Array(3))
+            : playlists).map((item, index) => <CourseCard
+                item={item} key={index} onClick={handleClickOnCard} />)}
     </Grid>
 }
 export default Home;

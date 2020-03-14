@@ -20,16 +20,16 @@ function App() {
     () =>
       createMuiTheme({
         palette: {
-          type: prefersDarkMode ? 'dark' : 'light',
+          type: 'dark' 
         },
       }),
-    [prefersDarkMode],
+    [],
   );
   
   return (
     <ThemeProvider theme={theme}>
       <Navbar />
-      <Container maxWidth="xl" style={{ marginTop: '80px' }}>
+      <Container maxWidth="lg" style={{ marginTop: '80px' }}>
         <Router history={history}>
           <Switch >
             <Route exact path='/' component={Home} />
