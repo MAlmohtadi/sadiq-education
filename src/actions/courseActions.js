@@ -8,12 +8,9 @@ import {
 } from './types';
 import config from '../config/youtubeConfig';
 const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems`;
-const { api_key } = config;
+const api_key = process.env.API_KEY || config.api_key;
 // Get Playlist Videos
 export const getVideos = ({ maxResults = 50, playlistId, nextPageToken }) => async dispatch => {
-
-
-
 
   try {
     const res = await axios.get(apiUrl, {
@@ -37,7 +34,7 @@ export const getVideos = ({ maxResults = 50, playlistId, nextPageToken }) => asy
     });
   }
 };
-export const loadMoreVideos =  ({ maxResults = 50, playlistId, nextPageToken }) => async dispatch =>  {
+export const loadMoreVideos = ({ maxResults = 50, playlistId, nextPageToken }) => async dispatch => {
 
   try {
     const res = await axios.get(apiUrl, {

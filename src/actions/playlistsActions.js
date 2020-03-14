@@ -4,10 +4,12 @@ import {
   GET_PLAYlITS_ERROR
 } from './types';
 import config from '../config/youtubeConfig';
-
+  const { channel_id } = config;
+  const api_key = process.env.API_KEY || config.api_key;
+  
 // Get Channel Playlists
 export const getPlaylists = (maxResults = 50) => async dispatch => { 
-  const { api_key, channel_id } = config;
+
   const apiUrl = `https://www.googleapis.com/youtube/v3/playlists`;
 
   try {
