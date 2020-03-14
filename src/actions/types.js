@@ -1,0 +1,7 @@
+
+export const GET_PLAYlITS = 'GET_PLAYlITS';
+export const GET_PLAYlITS_ERROR = 'GET_PLAYlITS_ERROR';
+export const GET_VIDEOS = 'GET_VIDEOS';
+export const GET_VIDEOS_ERROR = 'GET_VIDEOS_ERROR';
+export const SET_CURRENT_VIDEO = 'SET_CURRENT_VIDEO';
+
