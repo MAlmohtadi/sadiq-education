@@ -23,7 +23,7 @@ const useStyles = makeStyles(theme => ({
 const Container = props => <Grid container {...props} justify='center' spacing={2} />;
 const Item = props => <Grid item {...props} />;
 
-const Course = (props) => {
+const Videos = (props) => {
     const classes = useStyles();
     const {
         history: {
@@ -73,4 +73,4 @@ const Course = (props) => {
 const mapStateToProps = state => ({
     course: state.courseReducer
 })
-export default connect(mapStateToProps, { getVideos, loadMoreVideos })(Course);
+export default connect(mapStateToProps, { getVideos, loadMoreVideos })(Videos);

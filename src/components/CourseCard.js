@@ -8,14 +8,14 @@ const useStyles = makeStyles(theme => ({
     card: {
         width: 300,
         margin: theme.spacing(3),
-        backgroundColor: theme.palette.background.paper,
-        color: theme.palette.primary.contrastText,
+        backgroundColor: '#26a69a',
+        color: '#b3e5fc',
     },
     media: {
         height: 190,
     },
     text: {
-        color: theme.palette.primary.contrastText,
+        color:'white',
     }
 }));
 
@@ -41,7 +41,7 @@ const CourseCard = ({ item, onClick }) => {
                             <Skeleton animation="wave" height={10} width="80%" />
                         </React.Fragment>
                     ) : (
-                            <Typography className={classes.text} variant="body2">
+                            <Typography className={classes.text} variant="h5">
                                 {
                                     item.snippet.title
                                 }

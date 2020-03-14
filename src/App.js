@@ -4,8 +4,9 @@ import { Container } from '@material-ui/core';
 import Navbar from './layout/Navbar';
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from 'react-router-dom';
+import Courses from './pages/Courses';
+import Videos from './pages/Videos';
 import Home from './pages/Home';
-import Course from './pages/Course';
 import { store, persister } from './store';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
@@ -21,9 +22,10 @@ function App() {
   const theme = React.useMemo(
     () =>
       createMuiTheme({
-        palette: {
-          type: 'dark'
-        },
+        direction: 'rtl',
+        // palette: {
+        //   type: 'dark'
+        // },
       }),
     [],
   );
@@ -37,7 +39,8 @@ function App() {
             <Router history={history}>
               <Switch >
                 <Route exact path='/' component={Home} />
-                <Route exact path='/course' component={Course} />
+                <Route exact path='/courses' component={Courses} />
+                <Route exact path='/videos' component={Videos} />
               </Switch>
             </Router>
           </Container>
