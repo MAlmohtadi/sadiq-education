@@ -11,11 +11,13 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         overflow: 'hidden',
-        backgroundColor: theme.palette.background.paper,
+        // backgroundColor: theme.palette.primary.dark,
+        backgroundColor: '#009688',
+        color:'#e0f2f1'
 
     },
     gridList: {
-        borderTop: '2px solid red',
+        borderTop: '2px solid #e0f2f1',
         paddingTop: 10,
         marginTop: 20,
         height: 600,
@@ -51,10 +53,10 @@ const Lectures = props => {
         <GridList cols={isWidthUp('md', props.width) ? 1 : 3} className={classes.gridList} onScroll={loadMore}>
             {videos && videos.map(item => {
                 const { snippet: { position, thumbnails, title } } = item;
-                return <GridListTile key={position}
+                return <GridListTile key={position} 
                     onClick={() => handleClickOnVideo(position)}
                     style={position === currentVideo.snippet.position
-                        ? { border: '2px solid red' } : {}} >
+                        ? { border: '2px solid #e0f2f1' } : {}} >
                     <img src={(thumbnails.standard && thumbnails.standard.url) || thumbnails.default.url} alt={title} />
                     <GridListTileBar
                         title={title}
