@@ -5,7 +5,12 @@ import {
 } from './types';
 import config from '../config/youtubeConfig';
   const { channel_id } = config;
-  const api_key = process.env.API_KEY || config.api_key;
+  let apiKey;
+  if (process.env.NODE_ENV !== 'production') {
+    apiKey = process.env.REACT_APP_API_YOUTUBE_KEY;
+  } else {
+    apiKey = process.env.API_YOUTUBE_KEY;
+  }
   
 // Get Channel Playlists
 export const getPlaylists = (maxResults = 50) => async dispatch => { 
@@ -18,7 +23,7 @@ export const getPlaylists = (maxResults = 50) => async dispatch => {
         part: 'snippet',
         channelId: channel_id,
         maxResults,
-        key: api_key
+        key: apiKey
       }
     });
 

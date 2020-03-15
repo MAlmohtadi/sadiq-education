@@ -7,7 +7,6 @@ import {
   LOAD_MORE_VIDEOS_ERROR
 } from './types';
 
-// import config from '../config/youtubeConfig';
 const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems`;
 let apiKey;
 if (process.env.NODE_ENV !== 'production') {
