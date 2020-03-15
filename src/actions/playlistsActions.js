@@ -4,16 +4,11 @@ import {
   GET_PLAYlITS_ERROR
 } from './types';
 import config from '../config/youtubeConfig';
-  const { channel_id } = config;
-  let apiKey;
-  if (process.env.NODE_ENV !== 'production') {
-    apiKey = process.env.REACT_APP_API_YOUTUBE_KEY;
-  } else {
-    apiKey = process.env.API_YOUTUBE_KEY;
-  }
-  
+const { channel_id } = config;
+const apiKey = process.env.REACT_APP_API_YOUTUBE_KEY;
+
 // Get Channel Playlists
-export const getPlaylists = (maxResults = 50) => async dispatch => { 
+export const getPlaylists = (maxResults = 50) => async dispatch => {
 
   const apiUrl = `https://www.googleapis.com/youtube/v3/playlists`;
 

@@ -8,16 +8,11 @@ import {
 } from './types';
 
 const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems`;
-let apiKey;
-if (process.env.NODE_ENV !== 'production') {
-  apiKey = process.env.REACT_APP_API_YOUTUBE_KEY;
-} else {
-  apiKey = process.env.API_YOUTUBE_KEY;
-}
+const apiKey = process.env.REACT_APP_API_YOUTUBE_KEY;
 
 // Get Playlist Videos
 export const getVideos = ({ maxResults = 50, playlistId, nextPageToken }) => async dispatch => {
-  console.log('API_YOUTUBE_KEY', apiKey)
+
   try {
     const res = await axios.get(apiUrl, {
       params: {
