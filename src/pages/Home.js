@@ -5,11 +5,19 @@ import { getPlaylists } from '../actions/playlistsActions'
 import { connect } from 'react-redux';
 import { makeStyles } from '@material-ui/core/styles';
 
-const useStyles = makeStyles({
+const useStyles = makeStyles(theme => ({
     root: {
         maxWidth: 345,
     },
-});
+    card: {
+        backgroundColor: theme.palette.primary.dark,
+         color:theme.palette.secondary.light,
+    },
+    actionCard: {
+        backgroundColor: theme.palette.primary.light,
+         color:theme.palette.secondary.light,
+    }
+}));
 const Home = (props) => {
     let history = useHistory();
     const classes = useStyles();
@@ -23,7 +31,7 @@ const Home = (props) => {
         alignItems="center">
         <Grid>
             <Card className={classes.root}>
-                <CardActionArea onClick={handleClickOnCard}>
+                <CardActionArea >
                     <CardMedia
                         component="img"
                         alt="Contemplative Reptile"
@@ -32,18 +40,18 @@ const Home = (props) => {
                         title="Contemplative Reptile"
 
                     />
-                    <CardContent>
+                    <CardContent className={classes.card}>
                         <Typography gutterBottom variant="h5" component="h2">
                             صادق ذياب
                         </Typography>
-                        <Typography variant="h6" color="textSecondary" component="p">
+                        <Typography variant="h6"  component="p">
                             رياضيات
                         </Typography>
                     </CardContent>
                 </CardActionArea>
-                <CardActions>
-                    <Button size="small" onClick={handleClickOnCard}>
-                        Watch
+                <CardActions className={classes.actionCard}>
+                    <Button color="secondary" onClick={handleClickOnCard}>
+                        مشاهدة الفيديوهات
                     </Button>
                 </CardActions>
             </Card>

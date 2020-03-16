@@ -11,8 +11,8 @@ const useStyles = makeStyles(theme => ({
         display: 'flex',
         flexWrap: 'wrap',
         overflow: 'hidden',
-        // backgroundColor: theme.palette.primary.dark,
-        backgroundColor: '#009688',
+        backgroundColor: theme.palette.primary.light,
+        // backgroundColor: '#009688',
         color:'#e0f2f1'
 
     },
@@ -39,14 +39,12 @@ const Lectures = props => {
     const handleClickOnVideo = (position) => {
         setCurrentVideo(position);
     }
-    console.log('videos', videos)
+    
     return (<Paper className={classes.videoListContainer}>
         <Box justifyItems='space-between' flexDirection='row' style={{ marginBottom: '20px' }}>
-            <Typography variant="h6" component="h6" >
-                Lectures
-            </Typography>
+            <Typography variant="h6" component="h6" > دروس </Typography>
             {currentVideo && <Typography variant="h6" component="h6" >
-                {currentVideo.snippet.position + 1} / {pageInfo.totalResults}
+            {pageInfo.totalResults}/{currentVideo.snippet.position + 1||0} 
             </Typography>
             }
         </Box>

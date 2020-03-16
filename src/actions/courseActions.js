@@ -8,7 +8,6 @@ import {
 } from './types';
 
 const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems`;
-const apiKey = process.env.REACT_APP_API_YOUTUBE_KEY;
 
 // Get Playlist Videos
 export const getVideos = ({ maxResults = 50, playlistId, nextPageToken }) => async dispatch => {
@@ -20,7 +19,7 @@ export const getVideos = ({ maxResults = 50, playlistId, nextPageToken }) => asy
         playlistId,
         maxResults,
         pageToken: nextPageToken,
-        key: apiKey
+        key:  process.env.REACT_APP_API_YOUTUBE_KEY
       }
     });
 
@@ -44,7 +43,7 @@ export const loadMoreVideos = ({ maxResults = 50, playlistId, nextPageToken }) =
         playlistId,
         maxResults,
         pageToken: nextPageToken,
-        key: apiKey
+        key:  process.env.REACT_APP_API_YOUTUBE_KEY
       }
     });
 

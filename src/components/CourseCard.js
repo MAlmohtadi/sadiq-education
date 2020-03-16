@@ -6,17 +6,15 @@ import { CardMedia, CardContent, Card, CardActionArea } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     card: {
-        width: 300,
-        margin: theme.spacing(3),
-        backgroundColor: '#26a69a',
-        color: '#b3e5fc',
+        width: 250,
+        margin: theme.spacing(2),
+        backgroundColor: theme.palette.primary.light,
+        color: '#FFF'
     },
     media: {
         height: 190,
     },
-    text: {
-        color:'white',
-    }
+
 }));
 
 const CourseCard = ({ item, onClick }) => {
@@ -41,7 +39,7 @@ const CourseCard = ({ item, onClick }) => {
                             <Skeleton animation="wave" height={10} width="80%" />
                         </React.Fragment>
                     ) : (
-                            <Typography className={classes.text} variant="h5">
+                            <Typography variant="h6">
                                 {
                                     item.snippet.title
                                 }
