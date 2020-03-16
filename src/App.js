@@ -2,6 +2,7 @@ import React from 'react';
 import './App.css';
 import { Container } from '@material-ui/core';
 import Navbar from './layout/Navbar';
+import Footer from './layout/Footer';
 import { createBrowserHistory } from "history";
 import { Router, Route, Switch } from 'react-router-dom';
 import Courses from './pages/Courses';
@@ -40,16 +41,16 @@ function App() {
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persister}>
-        <Container maxWidth="xl" style={{ marginTop: '80px' }}>
-        <Router history={history}>
-          <Navbar />
-        
+          <Container maxWidth="xl" style={{ marginTop: '80px' }}>
+            <Router history={history}>
+              <Navbar />
               <Switch >
-                <Route exact path='/' component={Home} />
                 <Route exact path='/courses' component={Courses} />
                 <Route exact path='/videos' component={Videos} />
+                <Route path='/' component={Home} />
               </Switch>
             </Router>
+            <Footer />
           </Container>
         </PersistGate>
       </Provider>

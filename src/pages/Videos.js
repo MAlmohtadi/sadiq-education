@@ -2,8 +2,6 @@ import React, { useEffect } from 'react';
 import {
     Grid, Paper, CircularProgress,
     Typography,
-    Button,
-    Box,
 } from '@material-ui/core';
 import { useHistory } from "react-router-dom";
 
@@ -74,8 +72,6 @@ const Videos = (props) => {
 
     return (
         <div className={classes.root}>
-
-
             <Container>
                 <Item item xs={12} sm={12} md={10}  >
                     <Typography variant="h4" component="h2" color="secondary" style={{ textAlign: 'center' }}>
@@ -94,7 +90,6 @@ const Videos = (props) => {
                         }
                     </Paper>
                 </Item>
-
                 <Item xs={12} sm={12} md={3}>
                     <Lectures loadMore={loadMore} />
                 </Item>
