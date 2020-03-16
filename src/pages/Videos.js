@@ -30,7 +30,7 @@ const useStyles = makeStyles(theme => ({
         justifyContent: 'center'
     },
     player: {
-        minHeight: '400px', maxHeight: '900px',
+        minHeight: 540, maxHeight: '900px',
         backgroundColor: theme.palette.primary.secondary,
     },
     loader: {
@@ -82,7 +82,6 @@ const Videos = (props) => {
                         {title}
                     </Typography>
                 </Item>
-
 
                 <Item xs={9} sm={12} md={9} className={classes.player}>
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { connect } from 'react-redux';
-import { Paper, Typography, GridList, GridListTile, GridListTileBar, Box } from '@material-ui/core';
+import { Paper, Typography, GridList, GridListTile, GridListTileBar, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
 import { setCurrentVideo, getVideos } from '../actions/courseActions';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
@@ -13,14 +13,14 @@ const useStyles = makeStyles(theme => ({
         overflow: 'hidden',
         backgroundColor: theme.palette.primary.light,
         // backgroundColor: '#009688',
-        color:'#e0f2f1'
+        color: '#e0f2f1'
 
     },
     gridList: {
         borderTop: '2px solid #e0f2f1',
         paddingTop: 10,
         marginTop: 20,
-        height: 600,
+        height: 550,
         [theme.breakpoints.down('sm')]: {
             direction: 'row',
             flexWrap: 'nowrap',
@@ -39,19 +39,30 @@ const Lectures = props => {
     const handleClickOnVideo = (position) => {
         setCurrentVideo(position);
     }
-    
+
+    const handleNextAndPrev = (action) => {
+        if (action === 'next')
+            setCurrentVideo(currentVideo.snippet.position + 1);
+        else
+            setCurrentVideo(currentVideo.snippet.position - 1);
+    }
+
     return (<Paper className={classes.videoListContainer}>
-        <Box justifyItems='space-between' flexDirection='row' style={{ marginBottom: '20px' }}>
+        <Box justifyItems='space-between' flexDirection='row' >
             <Typography variant="h6" component="h6" > دروس </Typography>
             {currentVideo && <Typography variant="h6" component="h6" >
-            {pageInfo.totalResults}/{currentVideo.snippet.position + 1||0} 
+                {pageInfo.totalResults}/{currentVideo.snippet.position + 1 || 0}
             </Typography>
             }
+        </Box>
+        <Box display="flex" justifyContent='space-around' justifyItems="space-around" width="100%" style={{ marginBottom: '20px' }} >
+            <Button color="secondary" size="large" onClick={() => { handleNextAndPrev('prev') }} disabled={!currentVideo.snippet.position} >السابق</Button>
+            <Button color="secondary" size="large" onClick={() => { handleNextAndPrev('next') }} disabled={currentVideo.snippet.position === videos.length - 1}>التالي</Button>
         </Box>
         <GridList cols={isWidthUp('md', props.width) ? 1 : 3} className={classes.gridList} onScroll={loadMore}>
             {videos && videos.map(item => {
                 const { snippet: { position, thumbnails, title } } = item;
-                return <GridListTile key={position} 
+                return <GridListTile key={position}
                     onClick={() => handleClickOnVideo(position)}
                     style={position === currentVideo.snippet.position
                         ? { border: '2px solid #e0f2f1' } : {}} >
