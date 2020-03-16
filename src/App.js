@@ -12,6 +12,7 @@ import { store, persister } from './store';
 import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
+import Helmet from 'react-helmet';
 
 const history = createBrowserHistory();
 
@@ -41,16 +42,21 @@ function App() {
     <ThemeProvider theme={theme}>
       <Provider store={store}>
         <PersistGate loading={null} persistor={persister}>
+          <Helmet>
+            <meta charSet="utf-8" />
+            <title>Sadiq Diab | رياضيات توجيهي | صادق دياب </title>
+            <link rel="sadiq-diab" href="https://sadiq-diab.netlify.com/" />
+          </Helmet>
           <Container maxWidth="xl" style={{ marginTop: '80px' }}>
             <Router history={history}>
-              <Navbar />
-              <Switch >
-                <Route exact path='/courses' component={Courses} />
-                <Route exact path='/videos' component={Videos} />
-                <Route path='/' component={Home} />
-              </Switch>
-            </Router>
-            <Footer />
+            <Navbar />
+            <Switch >
+              <Route exact path='/courses' component={Courses} />
+              <Route exact path='/videos' component={Videos} />
+              <Route path='/' component={Home} />
+            </Switch>
+          </Router>
+          <Footer />
           </Container>
         </PersistGate>
       </Provider>
