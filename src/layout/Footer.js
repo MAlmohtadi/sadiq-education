@@ -5,7 +5,7 @@ import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles(theme => ({
     root: {
-        display:'flex',
+        display: 'flex',
         alignItems: 'center',
         justifyContent: 'center',
         marginTop: theme.spacing(2),
@@ -27,8 +27,12 @@ const Footer = (props) => {
         <Paper className={classes.root}>
             <Typography variant="h6" component="h6" color="secondary">التواصل الاجتماعي</Typography>
             <Box >
-                <a className={classes.icon} classehref="https://www.facebook.com/sadeck.math/" target="_blink"><i className="fa fab fa-facebook-square fa-2x" style={{ color: '#4167b2' }} /></a>
-                <a className={classes.icon} href="https://www.youtube.com/channel/UCA6nCqN5wtga0-5o-jSUc3w" target="_blink"><i className="fa fab fa-youtube fa-2x" style={{ color: 'red' }} /></a>
+                <a className={classes.icon} href="https://www.facebook.com/sadeck.math/" target="_blink">
+                    <i className="fa fab fa-facebook-square fa-2x" style={{ color: '#4167b2' }} />
+                </a>
+                <a className={classes.icon} href="https://www.youtube.com/channel/UCA6nCqN5wtga0-5o-jSUc3w" target="_blink">
+                    <i className="fa fab fa-youtube fa-2x" style={{ color: 'red' }} />
+                </a>
             </Box>
         </Paper>
     )
