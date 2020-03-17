@@ -2,5 +2,5 @@
   publish="build"
 [[redirects]]
   from = "/*"
-  to = "/index.html"
+  to = "https://www.sadiq-daib.com"
   status = 200
