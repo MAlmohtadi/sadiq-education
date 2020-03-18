@@ -8,7 +8,7 @@ import { useHistory } from "react-router-dom";
 import { makeStyles } from '@material-ui/core/styles';
 import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
-import { getVideos, loadMoreVideos, setCurrentVideo } from '../actions/courseActions';
+import { getVideos, setCurrentVideo } from '../actions/courseActions';
 import Lectures from '../components/Lectures';
 
 
@@ -50,7 +50,7 @@ const Videos = (props) => {
             } = {}
         },
         course: { currentVideo, loading, nextPageToken },
-        getVideos, loadMoreVideos,  } = props;
+        getVideos  } = props;
 
     if (!playlistId) {
         history.push({ pathname: '/courses' })
@@ -62,10 +62,10 @@ const Videos = (props) => {
 
 
     const loadMore = () => {
-        console.log('scroll')
-        if (nextPageToken) {
-            loadMoreVideos({ playlistId, nextPageToken });
-        }
+        // console.log('scroll')
+        // if (nextPageToken) {
+        //     loadMoreVideos({ playlistId, nextPageToken });
+        // }
 
     }
 
@@ -91,7 +91,7 @@ const Videos = (props) => {
                     </Paper>
                 </Item>
                 <Item xs={12} sm={12} md={3}>
-                    <Lectures loadMore={loadMore} />
+                    <Lectures />
                 </Item>
             </Container>
         </div>)
@@ -104,4 +104,4 @@ const Videos = (props) => {
 const mapStateToProps = state => ({
     course: state.courseReducer
 })
-export default connect(mapStateToProps, { getVideos, loadMoreVideos, setCurrentVideo })(Videos);
+export default connect(mapStateToProps, { getVideos, setCurrentVideo })(Videos);

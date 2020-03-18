@@ -33,7 +33,7 @@ const Lectures = props => {
     const classes = useStyles();
     const {
         course: { videos, currentVideo, pageInfo },
-        setCurrentVideo, loadMore
+        setCurrentVideo
     } = props;
 
     const handleClickOnVideo = (position) => {
@@ -59,7 +59,7 @@ const Lectures = props => {
             <Button color="secondary" size="large" onClick={() => { handleNextAndPrev('prev') }} disabled={!currentVideo.snippet.position} >السابق</Button>
             <Button color="secondary" size="large" onClick={() => { handleNextAndPrev('next') }} disabled={currentVideo.snippet.position === videos.length - 1}>التالي</Button>
         </Box>
-        <GridList cols={isWidthUp('md', props.width) ? 1 : 3} className={classes.gridList} onScroll={loadMore}>
+        <GridList cols={isWidthUp('md', props.width) ? 1 : 3} className={classes.gridList} >
             {videos && videos.map(item => {
                 const { snippet: { position, thumbnails, title } } = item;
                 return <GridListTile key={position}
