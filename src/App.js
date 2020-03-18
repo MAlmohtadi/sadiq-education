@@ -4,7 +4,7 @@ import { Container } from '@material-ui/core';
 import Navbar from './layout/Navbar';
 import Footer from './layout/Footer';
 import { createBrowserHistory } from "history";
-import { Router, Route, Switch } from 'react-router-dom';
+import { Router, Route, Switch, Redirect } from 'react-router-dom';
 import Courses from './pages/Courses';
 import Videos from './pages/Videos';
 import Home from './pages/Home';
@@ -49,14 +49,17 @@ function App() {
           </Helmet>
           <Container maxWidth="xl" style={{ marginTop: '80px' }}>
             <Router history={history}>
-            <Navbar />
-            <Switch >
-              <Route exact path='/courses' component={Courses} />
-              <Route exact path='/videos' component={Videos} />
-              <Route path='/' component={Home} />
-            </Switch>
-          </Router>
-          <Footer />
+              <Navbar />
+              <Switch >
+                <Route exact path='/courses' component={Courses} />
+                <Route exact path='/videos' component={Videos} />
+                <Route exact path='/home' component={Home} />
+                <Route path="/">
+                  <Redirect to="/home" />
+                </Route>
+              </Switch>
+            </Router>
+            <Footer />
           </Container>
         </PersistGate>
       </Provider>
