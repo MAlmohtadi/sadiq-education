@@ -49,8 +49,8 @@ const Videos = (props) => {
                 state: { playlistId, title } = {}
             } = {}
         },
-        course: { currentVideo, loading, nextPageToken },
-        getVideos  } = props;
+        course: { currentVideo, loading },
+        getVideos } = props;
 
     if (!playlistId) {
         history.push({ pathname: '/courses' })
@@ -59,16 +59,6 @@ const Videos = (props) => {
     useEffect(() => {
         getVideos({ playlistId });
     }, [])
-
-
-    const loadMore = () => {
-        // console.log('scroll')
-        // if (nextPageToken) {
-        //     loadMoreVideos({ playlistId, nextPageToken });
-        // }
-
-    }
-
 
     return (
         <div className={classes.root}>
@@ -86,7 +76,7 @@ const Videos = (props) => {
                             loading ?
                                 <CircularProgress size={80} className={classes.loader} color='secondary' /> :
                                 <ReactPlayer url={`https://www.youtube.com/watch?v=${currentVideo.snippet.resourceId.videoId}`}
-                                    controls width='100%' height='100%' playing />
+                                    controls width='100%' height='100%' />
                         }
                     </Paper>
                 </Item>

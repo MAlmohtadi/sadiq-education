@@ -66,7 +66,7 @@ const Lectures = props => {
                     onClick={() => handleClickOnVideo(position)}
                     style={position === currentVideo.snippet.position
                         ? { border: '2px solid #e0f2f1' } : {}} >
-                    <img src={(thumbnails.standard && thumbnails.standard.url) || thumbnails.default.url} alt={title} />
+                    <img src={(thumbnails.standard && thumbnails.standard.url) || thumbnails.default.url} alt={title} width="100%" height="100%" />
                     <GridListTileBar
                         title={title}
                     />
