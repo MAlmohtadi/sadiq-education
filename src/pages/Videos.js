@@ -10,7 +10,7 @@ import ReactPlayer from 'react-player';
 import { connect } from 'react-redux';
 import { getVideos, setCurrentVideo } from '../actions/courseActions';
 import Lectures from '../components/Lectures';
-
+import ImageGallery from 'react-image-gallery'
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -41,7 +41,6 @@ const Container = props => <Grid container {...props} justify='center' spacing={
 const Item = props => <Grid item {...props} />;
 
 const Videos = (props) => {
-    const classes = useStyles();
     let history = useHistory();
     const {
         history: {
@@ -49,8 +48,8 @@ const Videos = (props) => {
                 state: { playlistId, title } = {}
             } = {}
         },
-        course: { currentVideo, loading, nextPageToken },
-        getVideos  } = props;
+        course: { videos },
+        getVideos } = props;
 
     if (!playlistId) {
         history.push({ pathname: '/courses' })
@@ -61,40 +60,19 @@ const Videos = (props) => {
     }, [])
 
 
-    const loadMore = () => {
-        // console.log('scroll')
-        // if (nextPageToken) {
-        //     loadMoreVideos({ playlistId, nextPageToken });
-        // }
 
-    }
-
-
-    return (
-        <div className={classes.root}>
-            <Container>
-                <Item item xs={12} sm={12} md={10}  >
-                    <Typography variant="h4" component="h2" color="secondary" style={{ textAlign: 'center' }}>
-                        {title}
-                    </Typography>
-                </Item>
-
-                <Item xs={9} sm={12} md={9} className={classes.player}>
-
-                    <Paper className={classes.paper} elevation={5} >
-                        {
-                            loading ?
-                                <CircularProgress size={80} className={classes.loader} color='secondary' /> :
-                                <ReactPlayer url={`https://www.youtube.com/watch?v=${currentVideo.snippet.resourceId.videoId}`}
-                                    controls width='100%' height='100%' playing />
-                        }
-                    </Paper>
-                </Item>
-                <Item xs={12} sm={12} md={3}>
-                    <Lectures />
-                </Item>
-            </Container>
-        </div>)
+    return (<ImageGallery
+        items={videos}
+        showFullscreenButton={false}
+        showPlayButton={false}
+        isRTL
+        o
+        thumbnailPosition="right"
+        infinite={false}
+        renderItem={(item) => <ReactPlayer key={item.videoId} url={item.embedUrl}
+            controls width="100%" />}
+    />
+    )
 }
 
 // <Box display="flex" justifyContent='space-around' justifyItems="space-around" >

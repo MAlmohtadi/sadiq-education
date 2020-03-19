@@ -6,7 +6,7 @@ import {
   // LOAD_MORE_VIDEOS,
   // LOAD_MORE_VIDEOS_ERROR
 } from './types';
-import data from '../data/playlistItems'
+import data from '../data/playlistItemsTransformed'
 
 // const apiUrl = `https://www.googleapis.com/youtube/v3/playlistItems`;
 
