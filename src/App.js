@@ -13,12 +13,12 @@ import { createMuiTheme, ThemeProvider } from '@material-ui/core/styles';
 import { PersistGate } from 'redux-persist/integration/react';
 import { Provider } from 'react-redux';
 import Helmet from 'react-helmet';
+import VideoList from './pages/VideoList';
 
 const history = createBrowserHistory();
 
 
 function App() {
-
   const theme = createMuiTheme({
     palette: {
       primary: {
@@ -47,19 +47,20 @@ function App() {
             <title>Sadiq Diab | رياضيات توجيهي | صادق دياب </title>
             <link rel="sadiq-diab" href="https://sadiq-diab.netlify.com/" />
           </Helmet>
-          <Container maxWidth="xl" style={{ marginTop: '80px' }}>
+          <Container maxWidth="xl" style={{ marginTop: 80, marginBottom: 80 }} >
             <Router history={history}>
               <Navbar />
               <Switch >
                 <Route exact path='/courses' component={Courses} />
                 <Route exact path='/videos' component={Videos} />
                 <Route exact path='/home' component={Home} />
+                <Route exact path='/course-videos' component={VideoList} />
                 <Route path="/">
                   <Redirect to="/home" />
                 </Route>
               </Switch>
+              <Footer />
             </Router>
-            <Footer />
           </Container>
         </PersistGate>
       </Provider>

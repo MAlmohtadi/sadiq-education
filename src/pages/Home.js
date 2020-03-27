@@ -29,11 +29,13 @@ const Home = (props) => {
 
     return (<Fragment>
         <Grid container direction="row"
-            justify="space-evenly"
+            // justify="space-evenly"
             alignItems="center"
-        // spacing={2}
+            spacing={2}
         >
-            <Grid item xs={8} sm={6}><Typography variant="v1" component="h1" color="primary" style={{ textAlign: 'center' }}>الموقع الرسمي للأستاذ صادق ذياب</Typography></Grid>
+            <Grid item xs={8} sm={6}>
+                <Typography variant="v1" component="h1" color="primary" style={{ textAlign: 'center' }}>الموقع الرسمي للأستاذ صادق ذياب</Typography>
+            </Grid>
             <Grid xs={8} sm={6}>
                 <Card className={classes.root} onClick={handleClickOnCard}>
                     <CardActionArea >

@@ -1,8 +1,8 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import { connect } from 'react-redux';
 import { Paper, Typography, GridList, GridListTile, GridListTileBar, Box, Button } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core/styles';
-import { setCurrentVideo, getVideos } from '../actions/courseActions';
+import { setCurrentVideo } from '../actions/courseActions';
 import withWidth, { isWidthUp } from '@material-ui/core/withWidth';
 
 const useStyles = makeStyles(theme => ({
@@ -30,6 +30,8 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const Lectures = props => {
+    const myRef = useRef(null);
+
     const classes = useStyles();
     const {
         course: { videos, currentVideo, pageInfo },
@@ -63,6 +65,8 @@ const Lectures = props => {
             {videos && videos.map(item => {
                 const { snippet: { position, thumbnails, title } } = item;
                 return <GridListTile key={position}
+
+                    itemRef={myRef}
                     onClick={() => handleClickOnVideo(position)}
                     style={position === currentVideo.snippet.position
                         ? { border: '2px solid #e0f2f1' } : {}} >
@@ -73,10 +77,11 @@ const Lectures = props => {
                 </GridListTile>
             })}
         </GridList>
-    </Paper>)
+    </Paper>);
+
 }
 
 const mapStateToProps = state => ({
     course: state.courseReducer
 })
-export default connect(mapStateToProps, { setCurrentVideo, getVideos })(withWidth()(Lectures));
+export default connect(mapStateToProps, { setCurrentVideo })(withWidth()(Lectures));

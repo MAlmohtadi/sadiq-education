@@ -49,15 +49,16 @@ const Videos = (props) => {
                 state: { playlistId, title } = {}
             } = {}
         },
-        course: { currentVideo, loading },
+        course: { currentVideo, loading, videos },
         getVideos } = props;
 
-    if (!playlistId) {
-        history.push({ pathname: '/courses' })
-    }
 
     useEffect(() => {
-        getVideos({ playlistId });
+        if (!playlistId && !videos.length) {
+            history.push({ pathname: '/courses' })
+        } else if (!videos.length) {
+            getVideos({ playlistId });
+        }
     }, [])
 
     return (
@@ -70,7 +71,6 @@ const Videos = (props) => {
                 </Item>
 
                 <Item xs={9} sm={12} md={9} className={classes.player}>
-
                     <Paper className={classes.paper} elevation={5} >
                         {
                             loading ?

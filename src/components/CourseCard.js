@@ -6,10 +6,13 @@ import { CardMedia, CardContent, Card, CardActionArea } from '@material-ui/core'
 
 const useStyles = makeStyles(theme => ({
     card: {
-        width: 250,
+        // width: 200,
         margin: theme.spacing(2),
-        backgroundColor: theme.palette.primary.light,
-        color: '#FFF'
+        backgroundColor: theme.palette.primary.dark,
+        color: '#FFF',
+        '&:hover': {
+            backgroundColor: theme.palette.secondary.light,
+        },
     },
     media: {
         height: 190,
@@ -21,7 +24,7 @@ const CourseCard = ({ item, onClick }) => {
     const classes = useStyles();
     return (
         <Card className={classes.card} onClick={() => onClick(item)}>
-            <CardActionArea >
+            <CardActionArea>
                 {!item ? (
                     <Skeleton animation="wave" variant="rect" className={classes.media} />
                 ) : (
