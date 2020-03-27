@@ -29,7 +29,7 @@ const Home = (props) => {
 
     return (<Fragment>
         <Grid container direction="row"
-            // justify="space-evenly"
+            justify="center"
             alignItems="center"
             spacing={2}
         >
@@ -45,7 +45,6 @@ const Home = (props) => {
                             height="auto"
                             image="../assets/SADIQ.jpg"
                             title="صادق دياب"
-
                         />
                         <CardContent className={classes.card}>
                             <Typography gutterBottom variant="h5" component="h2">

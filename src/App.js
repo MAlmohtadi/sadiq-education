@@ -47,7 +47,7 @@ function App() {
             <title>Sadiq Diab | رياضيات توجيهي | صادق دياب </title>
             <link rel="sadiq-diab" href="https://sadiq-diab.netlify.com/" />
           </Helmet>
-          <Container maxWidth="xl" style={{ marginTop: 80, marginBottom: 80 }} >
+          <Container maxWidth="xl" style={{ marginTop: 80, marginBottom: 70 }} >
             <Router history={history}>
               <Navbar />
               <Switch >

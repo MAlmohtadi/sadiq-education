@@ -13,6 +13,7 @@ const useStyles = makeStyles(theme => ({
     },
     title: {
         flexGrow: 1,
+        cursor: 'pointer'
     },
     appBar: {
         backgroundColor: theme.palette.primary.dark,
@@ -25,11 +26,11 @@ const Navbar = (props) => {
     const classes = useStyles();
     let history = useHistory();
 
-    return (<AppBar position="fixed" className={classes.appBar}>
+    return (<AppBar position="fixed" className={classes.appBar} dir="LTR">
         <Toolbar>
-            <Typography variant="h6" className={classes.title}>SADIQ DIAB</Typography>
-            <Button color="inherit" onClick={() => { history.push({ pathname: '/' }) }}>الرئيسية</Button>
+            <Typography variant="h6" className={classes.title} onClick={() => { history.push({ pathname: '/' }) }}>SADIQ DIAB</Typography>
             <Button color="inherit" onClick={() => { history.push({ pathname: '/courses' }) }}>المواد</Button>
+            <Button color="inherit" onClick={() => { history.push({ pathname: '/' }) }}>الرئيسية</Button>
         </Toolbar>
     </AppBar>)
 }

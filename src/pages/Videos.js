@@ -69,8 +69,7 @@ const Videos = (props) => {
                         {title}
                     </Typography>
                 </Item>
-
-                <Item xs={9} sm={12} md={9} className={classes.player}>
+                <Item xs={12} sm={12} md={9} className={classes.player}>
                     <Paper className={classes.paper} elevation={5} >
                         {
                             loading ?
@@ -87,10 +86,6 @@ const Videos = (props) => {
         </div>)
 }
 
-// <Box display="flex" justifyContent='space-around' justifyItems="space-around" >
-// <Button color="secondary" size="large" onClick={() => { history.goBack() }}>السابق</Button>
-// <Button color="secondary" size="large" onClick={() => { history.goBack() }}>التالي</Button>
-// </Box>
 const mapStateToProps = state => ({
     course: state.courseReducer
 })
