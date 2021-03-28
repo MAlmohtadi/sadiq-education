@@ -11,7 +11,9 @@ const Courses = (props) => {
     const { getPlaylists, playlistsReducer: { playlists, loading } } = props;
     useEffect(() => {
         loading && getPlaylists();
-    }, [])
+    },
+        // eslint-disable-next-line 
+        [loading])
 
     const handleClickOnCard = ({ id, snippet: { title } }) => {
         history.push({ pathname: '/course-videos', state: { playlistId: id, title } })

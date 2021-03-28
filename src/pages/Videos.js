@@ -57,9 +57,12 @@ const Videos = (props) => {
         if (!playlistId && !videos.length) {
             history.push({ pathname: '/courses' })
         } else if (!videos.length) {
+            
             getVideos({ playlistId });
         }
-    }, [])
+        
+    }, // eslint-disable-next-line 
+    [playlistId,videos])
 
     return (
         <div className={classes.root}>

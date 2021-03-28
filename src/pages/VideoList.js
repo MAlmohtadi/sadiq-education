@@ -37,7 +37,8 @@ const VideosList = (props) => {
         } else {
             getVideos({ playlistId });
         }
-    }, [])
+    },  // eslint-disable-next-line 
+    [playlistId])
 
     const handleClickOnVideo = (position) => {
         setCurrentVideo(position);
